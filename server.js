@@ -35,8 +35,6 @@ app.post("/", async (req, res) => {
                 body: body,
             },
             token: token,
-            content_available: true,
-            priority: 'high',
         };
 
         // Envía la notificación push
