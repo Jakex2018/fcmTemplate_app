@@ -31,13 +31,23 @@ app.post("/", async (req, res) => {
     try {
         const message = {
             notification: {
-                title: title,
-                body: body,
+                "title": title,
+                "body": body
+            },
+            data: {
+                "title": title,
+                "body": body,
+                "score": "4.5"
+            },
+            android: {
+                "notification": {
+                    "priority": "high",
+                    "sound": "default",
+                    "clickAction": ".PushReceiverActivity"
+                }
             },
             token: token,
         };
-
-        // Envía la notificación push
         const response = await admin.messaging().send(message);
         res.status(200).send({ success: true, response });
     } catch (error) {
@@ -49,6 +59,3 @@ app.post("/", async (req, res) => {
 app.listen(port, () => {
     console.log(`Server listening on port ${port}`)
 })
-
-
-
