@@ -58,7 +58,9 @@ app.post("/", async (req, res) => {
 })
 
 const paymentRouter = require("./routes/payment_route.js")
+const paypalRouter = require("./routes/paypal_route.js")
 app.use("/payments", paymentRouter)
+app.use("/payments",paypalRouter)
 
 
 
