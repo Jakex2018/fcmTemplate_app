@@ -44,3 +44,19 @@ router.post("/create-paypal-order", async (req, res) => {
     res.status(500).json({ error: "Error creando orden de PayPal" });
   }
 });
+
+router.post("/capture-paypal-order", async (req, res) => {
+  const { orderId } = req.body;
+
+  const request = new paypal.orders.OrdersCaptureRequest(orderId);
+  request.requestBody({}); // La captura no requiere cuerpo
+
+  try {
+    const capture = await client.execute(request);
+    res.status(200).json({ success: true, data: capture.result });
+  } catch (error) {
+    console.error("Error capturando orden de PayPal:", error);
+    res.status(500).json({ error: "No se pudo capturar la orden de PayPal" });
+  }
+});
+
