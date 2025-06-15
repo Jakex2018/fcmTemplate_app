@@ -9,7 +9,6 @@ const environment = new paypal.core.SandboxEnvironment(
 );
 const client = new paypal.core.PayPalHttpClient(environment);
 
-// Crear orden de pago
 router.post("/create-paypal-order", async (req, res) => {
   const { amount } = req.body;
 
@@ -17,18 +16,27 @@ router.post("/create-paypal-order", async (req, res) => {
   request.prefer("return=representation");
   request.requestBody({
     intent: "CAPTURE",
-    purchase_units: [{
-      amount: {
-        currency_code: "USD",
-        value: amount || "3.00"
-      }
-    }]
+    purchase_units: [
+      {
+        amount: {
+          currency_code: "USD",
+          value: amount || "3.00",
+        },
+      },
+    ],
+    application_context: {
+      return_url: "https://yourdomain.com/paypal/success",
+      cancel_url: "https://yourdomain.com/paypal/cancel",
+      brand_name: "TemplateApp",
+      landing_page: "LOGIN",
+      user_action: "PAY_NOW",
+    },
   });
 
   try {
     const order = await client.execute(request);
     res.status(200).json({
-      id: order.result.id, // Este ID se usa en Flutter para autorizar el pago
+      id: order.result.id,
       links: order.result.links,
     });
   } catch (error) {
@@ -36,5 +44,3 @@ router.post("/create-paypal-order", async (req, res) => {
     res.status(500).json({ error: "Error creando orden de PayPal" });
   }
 });
-
-module.exports = router;
