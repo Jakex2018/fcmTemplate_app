@@ -20,6 +20,9 @@ importers:
       nodemon:
         specifier: ^3.1.9
         version: 3.1.9
+      stripe:
+        specifier: ^18.2.1
+        version: 18.2.1(@types/node@22.13.1)
 
 packages:
 
@@ -829,6 +832,15 @@ packages:
   strip-ansi@6.0.1:
     resolution: {integrity: sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==}
     engines: {node: '>=8'}
+
+  stripe@18.2.1:
+    resolution: {integrity: sha512-GwB1B7WSwEBzW4dilgyJruUYhbGMscrwuyHsPUmSRKrGHZ5poSh2oU9XKdii5BFVJzXHn35geRvGJ6R8bYcp8w==}
+    engines: {node: '>=12.*'}
+    peerDependencies:
+      '@types/node': '>=12.x.x'
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
 
   strnum@1.0.5:
     resolution: {integrity: sha512-J8bbNyKKXl5qYcR36TIO8W3mVGVHrmmxsd5PAItGkmyzwJvybiw2IVq5nqd0i4LSNSkB/sx9VHllbfFdr9k1JA==}
@@ -1952,6 +1964,12 @@ snapshots:
     dependencies:
       ansi-regex: 5.0.1
     optional: true
+
+  stripe@18.2.1(@types/node@22.13.1):
+    dependencies:
+      qs: 6.13.0
+    optionalDependencies:
+      '@types/node': 22.13.1
 
   strnum@1.0.5:
     optional: true

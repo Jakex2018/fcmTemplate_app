@@ -56,6 +56,11 @@ app.post("/", async (req, res) => {
     }
 })
 
+const paymentRouter = require("./routes/payment_route.js")
+app.use("/payments", paymentRouter)
+
+
+
 app.listen(port, () => {
     console.log(`Server listening on port ${port}`)
 })
