@@ -3,10 +3,18 @@ const router = express.Router();
 const paypal = require("@paypal/checkout-server-sdk");
 
 // Configurar entorno sandbox
+const environment = new paypal.core.LiveEnvironment(
+  process.env.PAYPAL_CLIENT_ID,
+  process.env.PAYPAL_CLIENT_SECRET
+);
+
+/*
+MODE SANDBOX
 const environment = new paypal.core.SandboxEnvironment(
     process.env.PAYPAL_CLIENT_ID,
     process.env.PAYPAL_CLIENT_SECRET
 );
+*/
 const client = new paypal.core.PayPalHttpClient(environment);
 
 router.post("/create-paypal-order", async (req, res) => {
